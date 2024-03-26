@@ -17,14 +17,14 @@ exports.getBookings = async (req, res, next) => {
         car: carId,
       }).populate({
         path: "car",
-        select: "model description",
+        select: "model description picture",
       });
     } else {
       query = Booking.find({
         user: req.user.id,
       }).populate({
         path: "car",
-        select: "model description",
+        select: "model description picture",
       });
     }
   } 
@@ -32,12 +32,12 @@ exports.getBookings = async (req, res, next) => {
     if (carId) {
       query = Booking.find({ car: carId }).populate({
         path: "car",
-        select: "model description",
+        select: "model description picture",
       });
     } else {
       query = Booking.find().populate({
         path: "car",
-        select: "model description",
+        select: "model description picture",
       });
     }
   }
@@ -94,6 +94,12 @@ exports.addBooking = async (req, res, next) => {
         message: `No car with the id of ${req.params.carId}`,
       });
     }
+
+    const existedBookings = await Booking.find({user:req.user.id});
+    if (existedBookings.length >= 3 && req.user.role !== 'admin'){
+        return res.status(400).json({success:false, message:`The user with ID ${req.user.id} has already made 3 bookings`});
+    }
+
     req.body.user = req.user.id;
 
     // only allow the registered user to book up to 3 nights
