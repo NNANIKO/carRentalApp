@@ -19,7 +19,9 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "https://swdevprac2-project-cha.vercel.app/"
+}));
 // app.use(cors({
 //   origin: 'https://swdevprac2-project-cha.vercel.app',
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
