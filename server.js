@@ -19,17 +19,17 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 const cors = require("cors");
 const app = express();
-//app.use(cors());
+app.use(cors());
 // app.use(cors({
 //   origin: 'https://swdevprac2-project-cha.vercel.app',
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //   allowedHeaders: ['Content-Type', 'Authorization'],
 // }));
-const allowedOrigins = ['https://swdevprac2-project-cha.vercel.app/'];
-const options = {
-  origin: allowedOrigins
-};
-app.use(cors(options))
+// const allowedOrigins = ['https://swdevprac2-project-cha.vercel.app/'];
+// const options = {
+//   origin: allowedOrigins
+// };
+// app.use(cors(options))
 
 app.use(express.json());
 app.use(mongoSanitize());
