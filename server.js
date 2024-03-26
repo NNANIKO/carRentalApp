@@ -25,6 +25,11 @@ const app = express();
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //   allowedHeaders: ['Content-Type', 'Authorization'],
 // }));
+const allowedOrigins = ['https://swdevprac2-project-cha.vercel.app/'];
+const options = {
+  origin: allowedOrigins
+};
+app.use(cors(options))
 
 app.use(express.json());
 app.use(mongoSanitize());
